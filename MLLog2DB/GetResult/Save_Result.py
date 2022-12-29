@@ -37,7 +37,6 @@ def Draw_Confusion(true_datas, predict_datas, save_url=None):
 
 #private
 def Show_EndTrain_Graph(log_data):
-    plt.subplot(1,2,1)
     plt.plot(log_data.get('acc'))
     plt.plot(log_data.get('val_acc'))
     plt.ylabel('acc')
@@ -47,7 +46,6 @@ def Show_EndTrain_Graph(log_data):
     plt.show()
     plt.clf()
 
-    plt.subplot(1,2,2)
     plt.plot(log_data.get('acc'))
     plt.plot(log_data.get('val_acc'))
     plt.ylabel('acc')
@@ -61,7 +59,6 @@ def Show_EndTrain_Graph(log_data):
 
 #private
 def Save_EndTrain_Graph(log_data, save_url):
-    plt.subplot(1,2,1)
     plt.plot(log_data.get('acc'))
     plt.plot(log_data.get('val_acc'))
     plt.ylabel('acc')
@@ -71,7 +68,6 @@ def Save_EndTrain_Graph(log_data, save_url):
     plt.savefig(save_url+'/acc.png')
     plt.clf()
 
-    plt.subplot(1,2,2)
     plt.plot(log_data.get('loss'))
     plt.plot(log_data.get('val_loss'))
     plt.ylabel('loss')
@@ -84,7 +80,6 @@ def Save_EndTrain_Graph(log_data, save_url):
 
 def Draw_Graph(collection,model_name, save_url=None):
     result = collection.find_one({'model_name': model_name})
-    plt.subplot(1,2,1)
     plt.plot(result['logs']['acc'])
     plt.plot(result['logs']['val_acc'])
     plt.ylabel('acc')
@@ -96,7 +91,6 @@ def Draw_Graph(collection,model_name, save_url=None):
         plt.savefig(save_url+'/acc.png')
     plt.clf()
 
-    plt.subplot(1,2,2)
     plt.plot(result['logs']['loss'])
     plt.plot(result['logs']['val_loss'])
     plt.ylabel('acc')
