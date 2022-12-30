@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 import pandas as pd
 import seaborn as sn
+import os
 # from sklearn.metrics import precision_score, recall_score, f1_score
 
 __all__ = ['Draw_Graph','Draw_All_Graph','Draw_Confusion']
@@ -56,16 +57,25 @@ def Show_EndTrain_Graph(log_data):
     plt.show()
     plt.clf()
 
+def __createFolder(directory):
+    try:
+        if not os.path.exists(directory):#파일존재여부 확인
+            os.makedirs(directory)
+    except OSError:
+        print ('Error: Creating directory. ' +  directory)
+ 
 
 #private
-def Save_EndTrain_Graph(log_data, save_url):
+def Save_EndTrain_Graph(log_data):
+    result_url = '../../result'
+    __createFolder(result_url)
     plt.plot(log_data.get('acc'))
     plt.plot(log_data.get('val_acc'))
     plt.ylabel('acc')
     plt.xlabel('epoch')
     plt.legend(['train_acc','val_acc'])
     plt.title('accuracy')
-    plt.savefig(save_url+'/acc.png')
+    plt.savefig(result_url+'/acc.png')
     plt.clf()
 
     plt.plot(log_data.get('loss'))
@@ -75,7 +85,7 @@ def Save_EndTrain_Graph(log_data, save_url):
     plt.legend(['train_loss','val_loss'])
     plt.title('loss')
 
-    plt.savefig(save_url+'/loss.png')
+    plt.savefig(result_url+'/loss.png')
     plt.clf()
 
 def Draw_Graph(collection,model_name, save_url=None):
