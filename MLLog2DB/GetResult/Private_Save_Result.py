@@ -26,6 +26,7 @@ def Save_logs_Dir(hyper_data):
         f.write('LR_scheduler: '+hyper_data.get('LR_scheduler')+'\n')
         f.write('etc: '+hyper_data.get('etc')+'\n')
         f.write('test_acc: '+str(hyper_data.get('test_acc'))+'\n')
+        
 #private
 def Show_EndTrain_Graph(log_data):
     plt.plot(log_data.get('acc'))

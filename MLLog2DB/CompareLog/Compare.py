@@ -1,12 +1,10 @@
 
-#모델을 하나씩만 받아서 쓰도록하기 
-def __Calc_Overfitting_rate(model1:dict, model2:dict):
+
+def __Calc_Overfitting_rate(model1:dict):
     acc_over_list = []
     loss_over_list = []
     model1_acc_over_rate = 0.0
     model1_loss_over_rate = 0.0
-    model2_acc_over_rate = 0.0
-    model2_loss_over_rate = 0.0
     if len(model1.get('acc')) == len(model1.get('val_acc')):
         for i in range(0,len(model1.get('acc'))):
             acc_over_list.append(abs(model1.get('acc')[i] - model1.get('val_acc')[i]))
@@ -15,19 +13,8 @@ def __Calc_Overfitting_rate(model1:dict, model2:dict):
     model1_acc_over_rate = sum(acc_over_list) / len(model1.get('acc'))
     model1_loss_over_rate = sum(loss_over_list) / len(model1.get('loss'))
 
-    acc_over_list.clear()
-    loss_over_list.clear()
 
-    if len(model2.get('acc')) == len(model2.get('val_acc')):
-        for i in range(0,len(model2.get('acc'))):
-            acc_over_list.append(abs(model2.get('acc')[i] - model2.get('val_acc')[i]))
-        for i in range(0,len(model2.get('loss'))):
-            loss_over_list.append(abs(model2.get('loss')[i] - model2.get('val_loss')[i]))
-
-    model2_acc_over_rate = sum(acc_over_list) / len(model1.get('acc'))
-    model2_loss_over_rate = sum(loss_over_list) / len(model1.get('loss'))
-
-    return model1_acc_over_rate, model1_loss_over_rate, model2_acc_over_rate, model2_loss_over_rate
+    return model1_acc_over_rate, model1_loss_over_rate
 
 
 def __Find_test_best_score(score1, score2):
@@ -42,7 +29,8 @@ def __FindModel(coll, modelname):
 def Compare_Both(coll, model_1_name, model_2_name):
     model_1 = __FindModel(coll, model_1_name)
     model_2 = __FindModel(coll, model_2_name)
-    model1_acc,model1_loss,model2_acc,model2_loss = __Calc_Overfitting_rate(model_1.get('logs'),model_2.get('logs'))
+    model1_acc,model1_loss = __Calc_Overfitting_rate(model_1.get('logs'))
+    model2_acc,model2_loss = __Calc_Overfitting_rate(model_2.get('logs'))
     selection,test_acc,difference_value = __Find_test_best_score(model_1.get('test_acc'),model_2.get('test_acc'))
 
     if selection == 0:
