@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: Log2DB
+Version: 0.0.1
+Summary: Send Deep Learning Training,Test Log To DB
+Home-page: https://github.com/Oldentomato/Log2DB
+Author: WooSung Jo
+Author-email: jwsjws99@gmail.com
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+License-File: LICENSE
+
+# Log2DB
+DeepLearning Log Send to DB Module

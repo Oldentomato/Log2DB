@@ -9,7 +9,8 @@ setuptools.setup(
     description="Send Deep Learning Training,Test Log To DB",
     long_description=open('README.md').read(),
     url="https://github.com/Oldentomato/Log2DB",
-    packages=setuptools.find_packages(),
+    package_dir={"":"Log2DB"},
+    packages=setuptools.find_packages(where="Log2DB"),
     classifiers=[
         # 패키지에 대한 태그
         "Programming Language :: Python :: 3",
