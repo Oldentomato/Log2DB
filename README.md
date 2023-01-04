@@ -27,6 +27,6 @@ pip install log2db
 
 
 ## License
-[MIT](License)
+[MIT](LICENSE)
 
 
