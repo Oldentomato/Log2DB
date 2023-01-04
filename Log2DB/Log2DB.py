@@ -66,7 +66,10 @@ class SendLog:
                 'model_shape' : __model_shape,
                 'LR_scheduler' : LR_scheduler,
                 'etc' : etc,
-                'test_acc' : 0.0
+                'test_acc' : 0.0,
+                'precision' : 0.0,
+                'recall' : 0.0,
+                'f1_score' : 0.0
             }
             #모델명 중복여부 체크
             if self.__db.find_one({'model_name':self.__experiment_model_name}) is None:
@@ -144,15 +147,20 @@ class SendLog:
             Private_Save_Result.Save_EndTrain_Graph(self.__log_data,self.__experiment_model_name)
 
 #요기도 좀 수정이 필요 test_acc만 딱 넣기에는 사용하기가 좀 헷갈림
-    def on_test_end(self, test_acc:float=None) -> None:
+    def on_test_end(self, true_datas:list, predict_datas:list) -> None:
         """
-        Test 단계가 끝날 경우 Test에서 나온 Accuracy를 DB에 업로드
+        Test 단계가 끝날 경우 Test에서 나온 Precision, Recall, f1_score, Accuracy를 DB에 업로드, 
             Args
-                test_acc `float` : 테스트로 나온 Accuracy
+                true_datas `list` : 정답 데이터 리스트
+                predict_datas `list` : 예측 데이터 리스트
             Return
                 None
         """
-        self.__db.update_one({'model_name':self.__hyper_data.get('model_name')},{"$set":{"test_acc":test_acc}})
+        precision, recall, f1, acc = Private_Save_Result.Calc_scores(true_datas,predict_datas)
+        self.__db.update_one({'model_name':self.__hyper_data.get('model_name')},{"$set":{"precision":precision}})
+        self.__db.update_one({'model_name':self.__hyper_data.get('model_name')},{"$set":{"recall":recall}})
+        self.__db.update_one({'model_name':self.__hyper_data.get('model_name')},{"$set":{"f1_score":f1}})
+        self.__db.update_one({'model_name':self.__hyper_data.get('model_name')},{"$set":{"test_acc":acc}})
 
     def DownLoad_SingleLogs(self, model_name:str) -> None:
         """

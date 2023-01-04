@@ -4,7 +4,7 @@ import pandas as pd
 import seaborn as sn
 import os
 
-# from sklearn.metrics import precision_score, recall_score, f1_score
+
 
 def __createFolder(directory):
     try:
@@ -97,7 +97,7 @@ def Draw_Confusion(true_datas:list, predict_datas:list,model_name:str, save_url:
     result_url = 'result/'
     __createFolder(result_url)
     cf = confusion_matrix(true_datas,predict_datas)
-    df_cm = pd.DataFrame(cf, list(predict_datas.classes), list(true_datas.classes))
+    df_cm = pd.DataFrame(cf, predict_datas, true_datas)
     sn.heatmap(df_cm, annot=True, annot_kws={"size":16}, cmap=plt.cm.Blues, fmt='d')
     plt.title('Confusion Matrix\n')
 

@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import os
+from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
 
 def __createFolder(directory):
     try:
@@ -26,6 +27,9 @@ def Save_logs_Dir(hyper_data):
         f.write('LR_scheduler: '+hyper_data.get('LR_scheduler')+'\n')
         f.write('etc: '+hyper_data.get('etc')+'\n')
         f.write('test_acc: '+str(hyper_data.get('test_acc'))+'\n')
+        f.write('precision: '+str(hyper_data.get('precision'))+'\n')
+        f.write('recall: '+str(hyper_data.get('recall'))+'\n')
+        f.write('f1_score: '+str(hyper_data.get('f1_score'))+'\n')
         
 #private
 def Show_EndTrain_Graph(log_data):
@@ -73,3 +77,7 @@ def Save_EndTrain_Graph(log_data,model_name):
 
     plt.savefig(result_url+model_name+'/loss.png')
     plt.clf()
+
+
+def Calc_scores(true_datas:list, predict_datas:list)->tuple:
+    return precision_score(true_datas,predict_datas), recall_score(true_datas,predict_datas), f1_score(true_datas,predict_datas), accuracy_score(true_datas,predict_datas)
