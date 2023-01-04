@@ -1,3 +1,0 @@
-CompareLog
-GetResult
-Server
