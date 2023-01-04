@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="log2db",
-    version="0.0.1.1",
+    version="0.0.2",
     license='MIT',
     author="WooSung Jo",
     author_email="jwsjws99@gmail.com",
