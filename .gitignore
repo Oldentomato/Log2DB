@@ -1,3 +1,5 @@
 main.py
 __pycache__
 /log2db.egg-info
+/build
+/dist

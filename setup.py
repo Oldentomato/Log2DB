@@ -2,12 +2,13 @@ import setuptools
 
 setuptools.setup(
     name="log2db",
-    version="0.0.2",
+    version="0.0.3",
     license='MIT',
     author="WooSung Jo",
     author_email="jwsjws99@gmail.com",
     description="Send Deep Learning Training,Test Log To DB",
     long_description=open('README.md').read(),
+    long_description_content_type="text/markdown",
     url="https://github.com/Oldentomato/Log2DB",
     packages=setuptools.find_packages(),
     classifiers=[
