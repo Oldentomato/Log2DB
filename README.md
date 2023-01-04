@@ -59,6 +59,7 @@ sendmoel.on_train_end(save_graph_url=True)
 ```
 
 ## Dependency
+- **Pytorch** https://github.com/pytorch/pytorch
 - **Pandas** https://github.com/pandas-dev/pandas
 - **Matplotlib** https://github.com/matplotlib/matplotlib
 - **pymongo** https://github.com/mongodb/mongo-python-driver
